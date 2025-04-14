@@ -1,0 +1,7 @@
+﻿# About
+
+Simple dice game. You are able to roll the pair of dice 3 times, each time they'll give you their score. Once your 3 rolls are over
+then the game will end and show your final score.
+
+# License
+None at all.
