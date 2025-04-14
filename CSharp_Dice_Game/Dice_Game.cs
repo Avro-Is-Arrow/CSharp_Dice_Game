@@ -2,7 +2,7 @@
 using System.Reflection.Metadata;
 using System.Runtime;
 
-internal class Program
+internal class Dice_Game
  {
     // Fields
     private static int rollAmount = 3;
