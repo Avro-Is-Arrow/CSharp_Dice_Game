@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "CSharp_Dice_Game/1.0.0": {
+        "runtime": {
+          "CSharp_Dice_Game.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CSharp_Dice_Game/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

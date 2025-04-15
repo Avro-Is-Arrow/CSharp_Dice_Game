@@ -99,7 +99,7 @@ internal class Dice_Game
 
                         Thread.Sleep(1000);
                         Console.WriteLine("Rolling the 2st Die....");
-                        Console.WriteLine($"The 1st Die rolled {diceTwoScore}\n");
+                        Console.WriteLine($"The 2nd Die rolled {diceTwoScore}\n");
 
                         Console.WriteLine($"The total for this round is: {diceOneScore + diceTwoScore}");
                         break;
