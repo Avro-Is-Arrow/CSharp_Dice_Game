@@ -5,11 +5,16 @@ using System.Runtime;
 internal class Dice_Game
  {
     // Fields
+
+    // Int Fields
     private static int rollAmount = 3;
     private static int diceOneScore;
     private static int diceTwoScore;
     private static int totalAmount;
+
+    // String Fields
     private static string userInput;
+    
 
 
     static void Main(string[] args)
@@ -23,18 +28,43 @@ internal class Dice_Game
         Start:
             while (true)
             {
-                
-
-
-                Console.Write("Would you like to play the Dice Game: (Y/N): ");
+                // Asks user if they would like to play
+                Console.Write("\nWould you like to play the Dice Game: (Y/N): ");
                 userInput = Console.ReadLine().ToUpper();
 
                 if (userInput.ToUpper() == "Y")
                 {
-                    Console.WriteLine("Enjoy the game!\n");
+
+                   while (true) 
+                   {
+
+                         Console.Write("\nHow many times would you like to roll the dice? Amount (Numerical): ");
+                         userInput = Console.ReadLine();
+
+                        // Try and catch for the exception: FormatException... Makes sure the user doesn't break the game if they input a non numerical value.
+                        try
+                        {
+                           
+                            rollAmount = int.Parse(userInput);
+                            break;
+                        }
+
+                        catch (System.FormatException)
+                        {
+
+                            Console.WriteLine("Please insert a numerical value... Try again.\n");
+
+
+                        }
+                    }
+                    
+                     
+                    // Starts the game once everything has been filled in.
+                    Console.WriteLine("\nEnjoy the game!\n");
                     break;
                 }
 
+                // If the user selects "No" in the start, then it will end the application.
                 else if (userInput.ToUpper() == "N")
                 {
 
@@ -44,6 +74,7 @@ internal class Dice_Game
 
                 }
 
+                // If the player, when prompted at the beginning to either picl "Yes" or "No", inserts an invalid option, will loop back.
                 Console.WriteLine("Please insert a proper option\n");
 
             }
@@ -56,13 +87,14 @@ internal class Dice_Game
                 userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
+                    // Will roll the dice if the player selects "Yes"
                     case "Y":
-                        diceOneScore = RollDiceOne();
-                        diceTwoScore = RollDiceTwo();
+                        diceOneScore = RollDieOne();
+                        diceTwoScore = RollDieTwo();
                         totalAmount += diceOneScore + diceTwoScore;
                         rollAmount--;
 
-                        Console.WriteLine("Rolling the 1st Die....");
+                        Console.WriteLine("\nRolling the 1st Die....");
                         Console.WriteLine($"The 1st Die rolled {diceOneScore}");
 
                         Thread.Sleep(1000);
@@ -72,11 +104,13 @@ internal class Dice_Game
                         Console.WriteLine($"The total for this round is: {diceOneScore + diceTwoScore}");
                         break;
 
+                    // Will bring the player back to the beginning if they select "No"
                     case "N":
                         Console.WriteLine("Going to the beginning...");
                         Thread.Sleep(2000);
                         goto Start;
 
+                    // Will stop the user from inputing an invalid character/option.
                     default:
                         Console.WriteLine("Unsupported character... Please insert a valid character.\n");
                         goto StartOfTheGamePlay;
@@ -100,6 +134,8 @@ internal class Dice_Game
                 goto Start;
 
             case "N":
+                Console.WriteLine("\nExiting Game....");
+                Thread.Sleep(1000);
                 Environment.Exit(0);
                 break;
 
@@ -111,8 +147,8 @@ internal class Dice_Game
     }
        
 
-
-    private static int RollDiceOne() 
+    // Will roll die #1
+    private static int RollDieOne() 
     {
         Random random = new Random();
         int minValue = 1;
@@ -124,7 +160,8 @@ internal class Dice_Game
 
     }
 
-    private static int RollDiceTwo()
+    // Will roll die #2
+    private static int RollDieTwo()
     {
         Random random = new Random();
         int minValue = 1;
@@ -133,10 +170,4 @@ internal class Dice_Game
 
         return randomNumber;
     }
-
-    //private static int FinalScoreSystem()
-   // {
-     //   Console
-    //        .WriteLine("The dice")
-   // }
 }
