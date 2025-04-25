@@ -40,7 +40,7 @@ internal class Dice_Game
                 if (userInput.ToUpper() == "Y")
                 {
                     // Will ask the user how many times they would like to roll the dice.
-                    rollAmount = GetRollCount();
+                    GetRollCount(out rollAmount);
 
                     // Starts the game once everything has been filled in.
                     Console.WriteLine("\nEnjoy the game!\n");
@@ -136,13 +136,13 @@ internal class Dice_Game
         return random.Next(minValue, maxValue);
     }
 
-    private static int GetRollCount(){
+    private static void GetRollCount(out int rollAmount){
         while (true){
-            Console.Write($"{RollPrompt} Amount (Numerical): ");
+            Console.Write($"Please enter a Roll Amount (Numerical): ");
             if (int.TryParse(Console.ReadLine(), out int rollCount) && rollCount > 0)
             {
-                return rollCount;
-                
+                rollAmount = rollCount;
+                break;
             }
             else
             {
