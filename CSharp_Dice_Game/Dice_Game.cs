@@ -5,15 +5,20 @@ using System.Runtime;
 internal class Dice_Game
  {
     // Fields
-
+    private static Random random = new Random();
+    
     // Int Fields
-    private static int rollAmount = 3;
+    private static int rollAmount;
     private static int diceOneScore;
     private static int diceTwoScore;
     private static int totalAmount;
+    private const int minValue = 1;
+    private const int maxValue = 7; 
 
     // String Fields
     private static string userInput;
+    private const string RollPrompt = "Would you like to roll the dice?";
+
     
 
 
@@ -29,36 +34,14 @@ internal class Dice_Game
             while (true)
             {
                 // Asks user if they would like to play
-                Console.Write("\nWould you like to play the Dice Game: (Y/N): ");
+                Console.Write($"\n{RollPrompt}: (Y/N): ");
                 userInput = Console.ReadLine().ToUpper();
 
                 if (userInput.ToUpper() == "Y")
                 {
+                    // Will ask the user how many times they would like to roll the dice.
+                    rollAmount = GetRollCount();
 
-                   while (true) 
-                   {
-
-                         Console.Write("\nHow many times would you like to roll the dice? Amount (Numerical): ");
-                         userInput = Console.ReadLine();
-
-                        // Try and catch for the exception: FormatException... Makes sure the user doesn't break the game if they input a non numerical value.
-                        try
-                        {
-                           
-                            rollAmount = int.Parse(userInput);
-                            break;
-                        }
-
-                        catch (System.FormatException)
-                        {
-
-                            Console.WriteLine("Please insert a numerical value... Try again.\n");
-
-
-                        }
-                    }
-                    
-                     
                     // Starts the game once everything has been filled in.
                     Console.WriteLine("\nEnjoy the game!\n");
                     break;
@@ -83,14 +66,14 @@ internal class Dice_Game
         while( rollAmount > 0)
         {
             StartOfTheGamePlay:
-                Console.Write($"Would you like to roll the dice, you have {rollAmount} rolls left (Y/N): ");
+                Console.Write($"{RollPrompt}, you have {rollAmount} rolls left (Y/N): ");
                 userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
                     // Will roll the dice if the player selects "Yes"
                     case "Y":
-                        diceOneScore = RollDieOne();
-                        diceTwoScore = RollDieTwo();
+                        diceOneScore = RollDie();
+                        diceTwoScore = RollDie();
                         totalAmount += diceOneScore + diceTwoScore;
                         rollAmount--;
 
@@ -99,9 +82,9 @@ internal class Dice_Game
 
                         Thread.Sleep(1000);
                         Console.WriteLine("Rolling the 2st Die....");
-                        Console.WriteLine($"The 2nd Die rolled {diceTwoScore}\n");
+                        Console.WriteLine($"The 2nd Die rolled: {diceTwoScore}\n");
 
-                        Console.WriteLine($"The total for this round is: {diceOneScore + diceTwoScore}");
+                        Console.WriteLine($"The total for this round: is: {diceOneScore + diceTwoScore}");
                         break;
 
                     // Will bring the player back to the beginning if they select "No"
@@ -148,26 +131,24 @@ internal class Dice_Game
        
 
     // Will roll die #1
-    private static int RollDieOne() 
+    private static int RollDie() 
     {
-        Random random = new Random();
-        int minValue = 1;
-        int maxValue = 6; 
-        int randomNumber = random.Next(minValue, maxValue);
-
-        return randomNumber;
-        
-
+        return random.Next(minValue, maxValue);
     }
 
-    // Will roll die #2
-    private static int RollDieTwo()
-    {
-        Random random = new Random();
-        int minValue = 1;
-        int maxValue = 6;
-        int randomNumber = random.Next(minValue, maxValue);
-
-        return randomNumber;
+    private static int GetRollCount(){
+        while (true){
+            Console.Write($"{RollPrompt} Amount (Numerical): ");
+            if (int.TryParse(Console.ReadLine(), out int rollCount) && rollCount > 0)
+            {
+                return rollCount;
+                
+            }
+            else
+            {
+                Console.WriteLine("Please insert a numerical value greater than 0... Try again.\n");
+            }
+        }
     }
+
 }
